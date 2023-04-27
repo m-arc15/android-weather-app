@@ -29,3 +29,11 @@ junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
+[bundles]
+compose = [
+    "androidx-compose-ui",
+    "androidx-compose-material3",
+    "androidx-compose-ui-tooling-preview",
+    "androidx-compose-ui-graphics"
+]
