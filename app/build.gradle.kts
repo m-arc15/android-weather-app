@@ -1,6 +1,8 @@
+// :app module build.gradle.kts
+
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
@@ -14,16 +16,19 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner= "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
-            useSupportLibrary= true
+            useSupportLibrary = true
         }
     }
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled =  false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
