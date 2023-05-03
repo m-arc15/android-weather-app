@@ -124,7 +124,7 @@ internal class WeatherForecastApiTest {
 
     @Test
     fun getWeatherForecast_timeout_throwsSocketTimeoutException() {
-        server.enqueueResponse("forecast-200-minified.json", HTTP_OK, clientTimeoutInMillis)
+        server.enqueueResponse("forecast-200-minified.json", HTTP_OK, 2 * clientTimeoutInMillis)
 
         try {
             runBlocking {
