@@ -1,17 +1,16 @@
 package com.androidgeek.weather.feature.weather.data
 
+import com.androidgeek.weather.core.Utils.createHttpClient
+import com.androidgeek.weather.core.Utils.createRetrofitApi
 import com.androidgeek.weather.feature.weather.data.DataFixtures.currentLocation
 import com.androidgeek.weather.feature.weather.data.remote.OpenMeteoWeatherForecastApi
 import com.androidgeek.weather.feature.weather.data.remote.model.WeatherForecastApiErrorDTO
 import com.androidgeek.weather.feature.weather.data.remote.model.WeatherForecastDataDTO
 import com.androidgeek.weather.feature.weather.data.remote.model.WeatherForecastResponse
 import com.androidgeek.weather.util.enqueueResponse
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -20,36 +19,25 @@ import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Test
 import retrofit2.HttpException
-import retrofit2.Retrofit
 import java.net.HttpURLConnection.HTTP_BAD_REQUEST
 import java.net.HttpURLConnection.HTTP_OK
 import java.net.SocketTimeoutException
-import java.util.concurrent.TimeUnit
 
 internal class WeatherForecastApiTest {
 
     private val server = MockWebServer()
-
-    private val clientTimeoutInMillis = 30L
-    private val client = OkHttpClient.Builder()
-        .connectTimeout(clientTimeoutInMillis, TimeUnit.MILLISECONDS)
-        .readTimeout(clientTimeoutInMillis, TimeUnit.MILLISECONDS)
-        .writeTimeout(clientTimeoutInMillis, TimeUnit.MILLISECONDS)
-        .build()
+    private val timeoutInMillis = 30L
+    private val client = createHttpClient(timeoutInMillis)
 
     private lateinit var api: OpenMeteoWeatherForecastApi
 
     @Before
     fun setUp() {
-        val contentType = "application/json; charset=utf-8".toMediaType()
-        val customJson = Json(builderAction = { ignoreUnknownKeys = true })
-        val retrofit =
-            Retrofit.Builder().baseUrl(server.url("/"))
-                .client(client)
-                .addConverterFactory(customJson.asConverterFactory(contentType))
-                .build()
-
-        api = retrofit.create(OpenMeteoWeatherForecastApi::class.java)
+        api = createRetrofitApi(
+            baseUrl = server.url("/"),
+            httpClient = client,
+            apiClass = OpenMeteoWeatherForecastApi::class.java
+        )
     }
 
     @After
@@ -63,7 +51,7 @@ internal class WeatherForecastApiTest {
 
         val actualResult = runBlocking {
             api.getWeatherForecast(
-                latitude = currentLocation.latitude, longitude = currentLocation.longitude
+                currentLocation.latitude, currentLocation.longitude
             )
         }
 
@@ -86,7 +74,7 @@ internal class WeatherForecastApiTest {
 
         val actualResult = runBlocking {
             api.getWeatherForecast(
-                latitude = currentLocation.latitude, longitude = currentLocation.longitude
+                currentLocation.latitude, currentLocation.longitude
             )
         }
 
@@ -107,7 +95,7 @@ internal class WeatherForecastApiTest {
         try {
             runBlocking {
                 api.getWeatherForecast(
-                    latitude = currentLocation.latitude, longitude = currentLocation.longitude
+                    currentLocation.latitude, currentLocation.longitude
                 )
             }
             fail("Should have thrown HttpException before.")
@@ -124,13 +112,11 @@ internal class WeatherForecastApiTest {
 
     @Test
     fun getWeatherForecast_timeout_throwsSocketTimeoutException() {
-        server.enqueueResponse("forecast-200-minified.json", HTTP_OK, 2 * clientTimeoutInMillis)
+        server.enqueueResponse("forecast-200-minified.json", HTTP_OK, 2 * timeoutInMillis)
 
         try {
             runBlocking {
-                api.getWeatherForecast(
-                    latitude = currentLocation.latitude, longitude = currentLocation.longitude
-                )
+                api.getWeatherForecast(currentLocation.latitude, currentLocation.longitude)
             }
             fail("Should have thrown SocketTimeoutException before.")
         } catch (ex: SocketTimeoutException) {
