@@ -2,8 +2,9 @@ package com.androidgeek.weather.feature.weather.data
 
 import com.androidgeek.weather.core.Utils.createHttpClient
 import com.androidgeek.weather.core.Utils.createRetrofitApi
-import com.androidgeek.weather.feature.weather.data.DataFixtures.currentLocation
 import com.androidgeek.weather.feature.weather.data.remote.OpenMeteoWeatherForecastApi
+import com.androidgeek.weather.feature.weather.data.remote.OpenMeteoWeatherForecastApi.Companion.FORECAST_ENDPOINT_PATH
+import com.androidgeek.weather.feature.weather.data.remote.OpenMeteoWeatherForecastApi.Companion.FORECAST_HOURLY_PARAMS
 import com.androidgeek.weather.feature.weather.data.remote.model.WeatherForecastApiErrorDTO
 import com.androidgeek.weather.feature.weather.data.remote.model.WeatherForecastDataDTO
 import com.androidgeek.weather.feature.weather.data.remote.model.WeatherForecastResponse
@@ -25,6 +26,7 @@ import java.net.SocketTimeoutException
 
 internal class WeatherForecastApiTest {
 
+    private val currentLocation = Pair(51.51, -0.13)
     private val server = MockWebServer()
     private val timeoutInMillis = 30L
     private val client = createHttpClient(timeoutInMillis)
@@ -46,12 +48,59 @@ internal class WeatherForecastApiTest {
     }
 
     @Test
+    fun getWeatherForecast_regularRequest() {
+        server.enqueueResponse("forecast-200-minified.json", HTTP_OK)
+
+        runBlocking {
+            api.getWeatherForecast(
+                currentLocation.first, currentLocation.second
+            )
+        }
+
+        val request = server.takeRequest()
+
+        // verify headers
+        assertEquals("WeatherApp", request.getHeader("User-Agent"))
+        assertEquals("en-GB", request.getHeader("Accept-Language"))
+
+        // verify path
+        val (endpoint, params) = request.path!!.split('?')
+
+        // endpoint
+        assertEquals("/$FORECAST_ENDPOINT_PATH", endpoint)
+
+        // params
+        val segments = params.split('&')
+
+        // verify latitude
+        val latitude =
+            segments.find { it.startsWith("latitude") }?.substringAfter("latitude=")?.toDouble()
+        assertEquals(currentLocation.first, latitude)
+
+        // verify longitude
+        val longitude =
+            segments.find { it.startsWith("longitude") }?.substringAfter("longitude=")?.toDouble()
+        assertEquals(currentLocation.second, longitude)
+
+        // verify hourly params
+        val hourlyParams =
+            segments.filter { it.startsWith("hourly") }.map { it.substringAfter("hourly=") }
+        assertTrue(
+            FORECAST_HOURLY_PARAMS.size == hourlyParams.size && FORECAST_HOURLY_PARAMS.containsAll(
+                hourlyParams
+            ) && hourlyParams.containsAll(
+                FORECAST_HOURLY_PARAMS
+            )
+        )
+    }
+
+    @Test
     fun getWeatherForecast_http200_returnsWeatherForecastResponse_minified() {
         server.enqueueResponse("forecast-200-minified.json", HTTP_OK)
 
         val actualResult = runBlocking {
             api.getWeatherForecast(
-                currentLocation.latitude, currentLocation.longitude
+                currentLocation.first, currentLocation.second
             )
         }
 
@@ -74,7 +123,7 @@ internal class WeatherForecastApiTest {
 
         val actualResult = runBlocking {
             api.getWeatherForecast(
-                currentLocation.latitude, currentLocation.longitude
+                currentLocation.first, currentLocation.second
             )
         }
 
@@ -95,7 +144,7 @@ internal class WeatherForecastApiTest {
         try {
             runBlocking {
                 api.getWeatherForecast(
-                    currentLocation.latitude, currentLocation.longitude
+                    currentLocation.first, currentLocation.second
                 )
             }
             fail("Should have thrown HttpException before.")
@@ -116,7 +165,7 @@ internal class WeatherForecastApiTest {
 
         try {
             runBlocking {
-                api.getWeatherForecast(currentLocation.latitude, currentLocation.longitude)
+                api.getWeatherForecast(currentLocation.first, currentLocation.second)
             }
             fail("Should have thrown SocketTimeoutException before.")
         } catch (ex: SocketTimeoutException) {

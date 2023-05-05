@@ -3,6 +3,7 @@ package com.androidgeek.weather.core
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.HttpUrl
+import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -20,6 +21,15 @@ object Utils {
         .connectTimeout(timeout, unit)
         .readTimeout(timeout, unit)
         .writeTimeout(timeout, unit)
+        .addInterceptor(Interceptor { chain ->  
+            val original = chain.request()
+            val request = original.newBuilder()
+                .addHeader("User-Agent", "WeatherApp")
+                .addHeader("Accept-Language", "en-GB")
+                .method(original.method, original.body)
+                .build()
+            chain.proceed(request)
+        })
         .build()
 
     fun <T> createRetrofitApi(
