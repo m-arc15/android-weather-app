@@ -26,6 +26,7 @@ object Utils {
             val request = original.newBuilder()
                 .addHeader("User-Agent", "WeatherApp")
                 .addHeader("Accept-Language", "en-GB")
+                .addHeader("Content-Type", contentType.toString())
                 .method(original.method, original.body)
                 .build()
             chain.proceed(request)

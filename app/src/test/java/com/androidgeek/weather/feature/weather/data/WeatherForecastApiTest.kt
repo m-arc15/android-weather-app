@@ -9,9 +9,11 @@ import com.androidgeek.weather.feature.weather.data.remote.model.WeatherForecast
 import com.androidgeek.weather.feature.weather.data.remote.model.WeatherForecastDataDTO
 import com.androidgeek.weather.feature.weather.data.remote.model.WeatherForecastResponse
 import com.androidgeek.weather.util.enqueueResponse
+import com.androidgeek.weather.util.enqueueResponseFromBinaryFile
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -35,6 +37,7 @@ internal class WeatherForecastApiTest {
 
     @Before
     fun setUp() {
+        server.start(8080)
         api = createRetrofitApi(
             baseUrl = server.url("/"),
             httpClient = client,
@@ -62,6 +65,7 @@ internal class WeatherForecastApiTest {
         // verify headers
         assertEquals("WeatherApp", request.getHeader("User-Agent"))
         assertEquals("en-GB", request.getHeader("Accept-Language"))
+        assertEquals("application/json; charset=utf-8", request.getHeader("Content-Type"))
 
         // verify path
         val (endpoint, params) = request.path!!.split('?')
@@ -96,7 +100,7 @@ internal class WeatherForecastApiTest {
 
     @Test
     fun getWeatherForecast_http200_returnsWeatherForecastResponse_minified() {
-        server.enqueueResponse("forecast-200-minified.json", HTTP_OK)
+        server.enqueueResponseFromBinaryFile("forecast-200-minified.json", HTTP_OK)
 
         val actualResult = runBlocking {
             api.getWeatherForecast(
@@ -138,6 +142,23 @@ internal class WeatherForecastApiTest {
     }
 
     @Test
+    fun getWeatherForecast_http300_throwsHttpException() {
+        server.enqueue(MockResponse().setResponseCode(300))
+
+        try {
+            runBlocking {
+                api.getWeatherForecast(
+                    currentLocation.first, currentLocation.second
+                )
+            }
+
+        } catch (ex: HttpException) {
+            assertEquals(300, ex.code())
+            assertEquals("Redirection", ex.message())
+        }
+    }
+
+    @Test
     fun getWeatherForecast_http400_throwsHttpException() {
         server.enqueueResponse("forecast-400.json", HTTP_BAD_REQUEST)
 
@@ -149,6 +170,10 @@ internal class WeatherForecastApiTest {
             }
             fail("Should have thrown HttpException before.")
         } catch (ex: HttpException) {
+            assertEquals(400, ex.code())
+            assertEquals("Client Error", ex.message())
+
+            // verify error body
             val errorBodyString = ex.response()?.errorBody()?.string()!!
             val apiError = Json.decodeFromString<WeatherForecastApiErrorDTO>(errorBodyString)
             assertTrue(apiError.error)
@@ -156,6 +181,23 @@ internal class WeatherForecastApiTest {
                 "Cannot initialize WeatherVariable from invalid String value tempeture_2m for key hourly",
                 apiError.reason
             )
+        }
+    }
+
+    @Test
+    fun getWeatherForecast_http500_throwsHttpException() {
+        server.enqueue(MockResponse().setResponseCode(500))
+
+        try {
+            runBlocking {
+                api.getWeatherForecast(
+                    currentLocation.first, currentLocation.second
+                )
+            }
+
+        } catch (ex: HttpException) {
+            assertEquals(500, ex.code())
+            assertEquals("Server Error", ex.message())
         }
     }
 
