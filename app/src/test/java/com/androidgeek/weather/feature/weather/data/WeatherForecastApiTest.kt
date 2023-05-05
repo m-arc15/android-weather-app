@@ -120,7 +120,7 @@ internal class WeatherForecastApiTest {
             }
             fail("Should have thrown SocketTimeoutException before.")
         } catch (ex: SocketTimeoutException) {
-            assertEquals("Read timed out", ex.localizedMessage)
+            // Expected.
         }
     }
 

@@ -26,12 +26,12 @@ Chosen option: "Markdown Any Decision Records", because:
 
 The workflow will be:
 
-| Step | Status | Description |
-| --- | --- | --- |
-| 1 | Proposed | A developer creates an ADR document presenting an approach for a particular question or problem. |
-| 2 | Proposed | The developers and steering group discuss the ADR. During this period, the ADR should be updated to reflect additional context, concerns raised, and proposed changes. |
-| 3 | Accepted or Rejected | Once consensus is reached, ADR can be transitioned to either an "accepted" or "rejected" state. |
-| 4 | Deprecated | If a decision is revisited and a different conclusion is reached, a new ADR should be created documenting the context and rationale for the change. The new ADR should reference the old one, and once the new one is accepted, the old one should (in its "status" section) be updated to point to the new one. The old ADR should not be removed or otherwise modified except for the annotation to the new ADR. |
+| Step | Status               | Description                                                                                                                                                                                                                                                                                                                                                                                                        |
+|------|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1    | Proposed             | A developer creates an ADR document presenting an approach for a particular question or problem.                                                                                                                                                                                                                                                                                                                   |
+| 2    | Proposed             | The developers and steering group discuss the ADR. During this period, the ADR should be updated to reflect additional context, concerns raised, and proposed changes.                                                                                                                                                                                                                                             |
+| 3    | Accepted or Rejected | Once consensus is reached, ADR can be transitioned to either an "accepted" or "rejected" state.                                                                                                                                                                                                                                                                                                                    |
+| 4    | Deprecated           | If a decision is revisited and a different conclusion is reached, a new ADR should be created documenting the context and rationale for the change. The new ADR should reference the old one, and once the new one is accepted, the old one should (in its "status" section) be updated to point to the new one. The old ADR should not be removed or otherwise modified except for the annotation to the new ADR. |
 
 **Only after an ADR is accepted** - implementing code should be committed to the main branch of the relevant project / module.
 
