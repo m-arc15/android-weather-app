@@ -30,6 +30,7 @@ jobs:
         run: |
           # Update build.gradle.kts with new version code and name
           echo "${{ env.VERSION_CODE }} - ${{ env.VERSION_NAME }}"
+          echo $(pwd)
           sed -i '' -e 's/versionCode = [0-9]*/versionCode = ${{ env.VERSION_CODE }}/g' app/build.gradle.kts
           sed -i '' -e 's/versionName = \"[^\"]*\"/versionName = \"${{ env.VERSION_NAME }}\"/g' app/build.gradle.kts
 
