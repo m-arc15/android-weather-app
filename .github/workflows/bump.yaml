@@ -45,6 +45,6 @@ jobs:
         with:
           commit-message: "Bumping to ${{ env.VERSION_CODE }}"
           branch: "${{ github.ref }}"
-          title: "${{ env.VERSION_NAME }} - (${{ env.VERSION_CODE }})"
+          title: "Bumping to version: ${{ env.VERSION_NAME }} - (${{ env.VERSION_CODE }})"
           body: "${{ env.VERSION_NAME }} - (${{ env.VERSION_CODE }})"
           base: "main"
