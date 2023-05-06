@@ -8,8 +8,8 @@ import com.androidgeek.weather.feature.weather.data.remote.OpenMeteoWeatherForec
 import com.androidgeek.weather.feature.weather.data.remote.model.WeatherForecastApiErrorDTO
 import com.androidgeek.weather.feature.weather.data.remote.model.WeatherForecastDataDTO
 import com.androidgeek.weather.feature.weather.data.remote.model.WeatherForecastResponse
-import com.androidgeek.weather.util.enqueueResponse
-import com.androidgeek.weather.util.enqueueResponseFromBinaryFile
+import com.androidgeek.weather.utils.enqueueResponse
+import com.androidgeek.weather.utils.enqueueResponseFromBinaryFile
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
