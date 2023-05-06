@@ -14,7 +14,7 @@ android {
         applicationId = "com.androidgeek.weather"
         minSdk = 21
         targetSdk = 33
-        versionCode = 3
+        versionCode = 4
         versionName = "1.0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
