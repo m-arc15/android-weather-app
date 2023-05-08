@@ -53,6 +53,9 @@ android {
     testOptions {
         unitTests.isReturnDefaultValues = true
     }
+    lint {
+        sarifReport = true
+    }
 }
 
 dependencies {
