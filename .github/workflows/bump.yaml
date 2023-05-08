@@ -40,11 +40,19 @@ jobs:
           git commit -am "Bump version code and change version name"
           git push origin HEAD
 
-      - name: Open pull request
-        uses: peter-evans/create-pull-request@v5.0.0
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v5
         with:
           commit-message: "Bumping to ${{ env.VERSION_CODE }}"
           branch: "${{ github.ref }}"
           title: "Bumping to version: ${{ env.VERSION_NAME }} - (${{ env.VERSION_CODE }})"
           body: "${{ env.VERSION_NAME }} - (${{ env.VERSION_CODE }})"
           base: "main"
+
+      - name: Check outputs
+        if: ${{ steps.cpr.outputs.pull-request-number }}
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+          
