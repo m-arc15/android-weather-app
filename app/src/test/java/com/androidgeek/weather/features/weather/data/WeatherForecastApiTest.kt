@@ -1,13 +1,13 @@
-package com.androidgeek.weather.feature.weather.data
+package com.androidgeek.weather.features.weather.data
 
 import com.androidgeek.weather.core.Utils.createHttpClient
 import com.androidgeek.weather.core.Utils.createRetrofitApi
-import com.androidgeek.weather.feature.weather.data.remote.OpenMeteoWeatherForecastApi
-import com.androidgeek.weather.feature.weather.data.remote.OpenMeteoWeatherForecastApi.Companion.FORECAST_ENDPOINT_PATH
-import com.androidgeek.weather.feature.weather.data.remote.OpenMeteoWeatherForecastApi.Companion.FORECAST_HOURLY_PARAMS
-import com.androidgeek.weather.feature.weather.data.remote.model.WeatherForecastApiErrorDTO
-import com.androidgeek.weather.feature.weather.data.remote.model.WeatherForecastDataDTO
-import com.androidgeek.weather.feature.weather.data.remote.model.WeatherForecastResponse
+import com.androidgeek.weather.features.weather.data.remote.OpenMeteoWeatherForecastApi
+import com.androidgeek.weather.features.weather.data.remote.OpenMeteoWeatherForecastApi.Companion.FORECAST_ENDPOINT_PATH
+import com.androidgeek.weather.features.weather.data.remote.OpenMeteoWeatherForecastApi.Companion.FORECAST_HOURLY_PARAMS
+import com.androidgeek.weather.features.weather.data.remote.model.WeatherForecastApiErrorDTO
+import com.androidgeek.weather.features.weather.data.remote.model.WeatherForecastDataDTO
+import com.androidgeek.weather.features.weather.data.remote.model.WeatherForecastResponse
 import com.androidgeek.weather.utils.enqueueResponse
 import com.androidgeek.weather.utils.enqueueResponseFromBinaryFile
 import kotlinx.coroutines.runBlocking

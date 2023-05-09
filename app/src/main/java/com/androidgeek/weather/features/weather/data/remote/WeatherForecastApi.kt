@@ -1,6 +1,6 @@
-package com.androidgeek.weather.feature.weather.data.remote
+package com.androidgeek.weather.features.weather.data.remote
 
-import com.androidgeek.weather.feature.weather.data.remote.model.WeatherForecastResponse
+import com.androidgeek.weather.features.weather.data.remote.model.WeatherForecastResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
