@@ -1,9 +1,9 @@
-package com.androidgeek.weather.features.weather.data.network
+package com.androidgeek.weather.features.weather.data.network.api
 
 import com.androidgeek.weather.core.Utils.createHttpClient
 import com.androidgeek.weather.core.Utils.createRetrofitApi
-import com.androidgeek.weather.features.weather.data.network.OpenMeteoWeatherForecastApi.Companion.FORECAST_ENDPOINT_PATH
-import com.androidgeek.weather.features.weather.data.network.OpenMeteoWeatherForecastApi.Companion.FORECAST_HOURLY_PARAMS
+import com.androidgeek.weather.features.weather.data.network.api.OpenMeteoWeatherForecastApi.Companion.FORECAST_ENDPOINT_PATH
+import com.androidgeek.weather.features.weather.data.network.api.OpenMeteoWeatherForecastApi.Companion.FORECAST_HOURLY_PARAMS
 import com.androidgeek.weather.features.weather.data.network.model.WeatherForecastApiErrorDTO
 import com.androidgeek.weather.features.weather.data.network.model.WeatherForecastDataDTO
 import com.androidgeek.weather.features.weather.data.network.model.WeatherForecastResponse

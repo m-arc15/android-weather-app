@@ -1,4 +1,4 @@
-package com.androidgeek.weather.features.weather.data.network
+package com.androidgeek.weather.features.weather.data.network.api
 
 import com.androidgeek.weather.features.weather.data.network.model.WeatherForecastResponse
 import retrofit2.http.GET
