@@ -52,6 +52,7 @@ android {
     }
     testOptions {
         unitTests.isReturnDefaultValues = true
+        unitTests.isIncludeAndroidResources = true
     }
     lint {
         sarifReport = true
@@ -86,6 +87,7 @@ dependencies {
     // Local tests
     testImplementation(libs.junit4)
     testImplementation(libs.junit5)
+    testImplementation("com.google.truth:truth:1.1.3")
 
     // Device tests
     androidTestImplementation(libs.androidx.test.ext)
