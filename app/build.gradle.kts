@@ -85,9 +85,13 @@ dependencies {
 
     // Local tests
     testImplementation(libs.junit4)
+    testImplementation(libs.junit5)
 
     // Device tests
     androidTestImplementation(libs.androidx.test.ext)
     androidTestImplementation(libs.androidx.test.espresso.core)
 }
 
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
