@@ -1,4 +1,4 @@
-package com.androidgeek.weather.features.weather.data.network.model
+package com.androidgeek.weather.features.weather.data.remote.model
 
 import kotlinx.serialization.Serializable
 
