@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class WeatherForecastResponse(
     @SerialName("hourly")
-    val weatherForecastData: WeatherForecastDataDTO
+    val weatherForecastData: WeatherForecastDataDto
 )

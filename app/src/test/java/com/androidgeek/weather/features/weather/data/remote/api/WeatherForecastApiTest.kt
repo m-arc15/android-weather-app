@@ -4,8 +4,8 @@ import com.androidgeek.weather.core.Utils.createHttpClient
 import com.androidgeek.weather.core.Utils.createRetrofitApi
 import com.androidgeek.weather.features.weather.data.remote.api.OpenMeteoWeatherForecastApi.Companion.FORECAST_ENDPOINT_PATH
 import com.androidgeek.weather.features.weather.data.remote.api.OpenMeteoWeatherForecastApi.Companion.FORECAST_HOURLY_PARAMS
-import com.androidgeek.weather.features.weather.data.remote.model.WeatherForecastApiErrorDTO
-import com.androidgeek.weather.features.weather.data.remote.model.WeatherForecastDataDTO
+import com.androidgeek.weather.features.weather.data.remote.model.WeatherForecastApiErrorDto
+import com.androidgeek.weather.features.weather.data.remote.model.WeatherForecastDataDto
 import com.androidgeek.weather.features.weather.data.remote.model.WeatherForecastResponse
 import com.androidgeek.weather.utils.enqueueResponse
 import com.androidgeek.weather.utils.enqueueResponseFromBinaryFile
@@ -108,7 +108,7 @@ internal class WeatherForecastApiTest {
         }
 
         val expectedResult = WeatherForecastResponse(
-            weatherForecastData = WeatherForecastDataDTO(
+            weatherForecastData = WeatherForecastDataDto(
                 listOf("2023-05-01T00:00", "2023-05-01T01:00", "2023-05-01T02:00"),
                 listOf(6.1, 5.6, 4.9),
                 listOf(1, 0, 0),
@@ -174,7 +174,7 @@ internal class WeatherForecastApiTest {
 
             // verify error body
             val errorBodyString = ex.response()?.errorBody()?.string()!!
-            val apiError = Json.decodeFromString<WeatherForecastApiErrorDTO>(errorBodyString)
+            val apiError = Json.decodeFromString<WeatherForecastApiErrorDto>(errorBodyString)
             assertTrue(apiError.error)
             assertEquals(
                 "Cannot initialize WeatherVariable from invalid String value tempeture_2m for key hourly",

@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class WeatherForecastDataDTO(
+data class WeatherForecastDataDto(
     @SerialName("time")
     val times: List<String>,
     @SerialName("temperature_2m")
