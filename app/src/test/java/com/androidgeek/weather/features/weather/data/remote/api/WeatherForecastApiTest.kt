@@ -6,7 +6,7 @@ import com.androidgeek.weather.features.weather.data.remote.api.OpenMeteoWeather
 import com.androidgeek.weather.features.weather.data.remote.api.OpenMeteoWeatherForecastApi.Companion.FORECAST_HOURLY_PARAMS
 import com.androidgeek.weather.features.weather.data.remote.model.WeatherForecastApiErrorDto
 import com.androidgeek.weather.features.weather.data.remote.model.WeatherForecastDataDto
-import com.androidgeek.weather.features.weather.data.remote.model.WeatherForecastResponse
+import com.androidgeek.weather.features.weather.data.remote.model.WeatherForecastDto
 import com.androidgeek.weather.utils.enqueueResponse
 import com.androidgeek.weather.utils.enqueueResponseFromBinaryFile
 import kotlinx.coroutines.runBlocking
@@ -107,7 +107,7 @@ internal class WeatherForecastApiTest {
             )
         }
 
-        val expectedResult = WeatherForecastResponse(
+        val expectedResult = WeatherForecastDto(
             weatherForecastData = WeatherForecastDataDto(
                 listOf("2023-05-01T00:00", "2023-05-01T01:00", "2023-05-01T02:00"),
                 listOf(6.1, 5.6, 4.9),

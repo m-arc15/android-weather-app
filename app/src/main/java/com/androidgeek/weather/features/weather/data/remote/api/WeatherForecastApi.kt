@@ -1,6 +1,6 @@
 package com.androidgeek.weather.features.weather.data.remote.api
 
-import com.androidgeek.weather.features.weather.data.remote.model.WeatherForecastResponse
+import com.androidgeek.weather.features.weather.data.remote.model.WeatherForecastDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -11,7 +11,7 @@ interface OpenMeteoWeatherForecastApi {
         @Query("latitude") latitude: Double,
         @Query("longitude") longitude: Double,
         @Query("hourly") hourly: List<String> = FORECAST_HOURLY_PARAMS
-    ): WeatherForecastResponse
+    ): WeatherForecastDto
 
     companion object {
         const val FORECAST_ENDPOINT_PATH = "v1/forecast"
