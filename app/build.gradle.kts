@@ -35,6 +35,8 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+        // Flag to enable support for the new language APIs, i.e. LocalDateTime parse for API < 26
+        isCoreLibraryDesugaringEnabled = true
     }
     kotlinOptions {
         jvmTarget = "17"
@@ -64,6 +66,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+    coreLibraryDesugaring(libs.android.tools.desugar)
 
     // Compose BOM
     val composeBom = platform(libs.androidx.compose.bom)
@@ -87,7 +90,7 @@ dependencies {
     // Local tests
     testImplementation(libs.junit4)
     testImplementation(libs.junit5)
-    testImplementation("com.google.truth:truth:1.1.3")
+    testImplementation(libs.truth)
 
     // Device tests
     androidTestImplementation(libs.androidx.test.ext)
