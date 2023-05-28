@@ -1,9 +1,11 @@
 // :app module build.gradle.kts
 
 plugins {
+    kotlin("kapt")
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.hilt.android)
 }
 
 android {
@@ -43,6 +45,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
@@ -87,16 +90,32 @@ dependencies {
     implementation(libs.okhttp.logging)
     testImplementation(libs.okhttp.mockwebserver)
 
+    // Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+
+    // Timber
+    implementation(libs.timber)
+
     // Local tests
     testImplementation(libs.junit4)
     testImplementation(libs.junit5)
     testImplementation(libs.truth)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
+
 
     // Device tests
     androidTestImplementation(libs.androidx.test.ext)
     androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.mockk.android)
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }

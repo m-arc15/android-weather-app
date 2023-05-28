@@ -1,6 +1,7 @@
 package com.androidgeek.weather.features.weather.domain
 
 import com.androidgeek.weather.features.weather.domain.util.Resource
+import com.google.common.truth.Truth.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -15,7 +16,7 @@ internal class ResourceTest {
     fun testSuccessResource() {
         resource = Resource.Success(100)
 
-        assertTrue(resource is Resource.Success)
+        assertThat(resource).isInstanceOf(Resource.Success::class.java)
         assertEquals(100, resource.data)
         assertNull(resource.message)
     }
@@ -24,7 +25,7 @@ internal class ResourceTest {
     fun testErrorResource() {
         resource = Resource.Error<Int>("Invalid request")
 
-        assertTrue(resource is Resource.Error)
+        assertThat(resource).isInstanceOf(Resource.Error::class.java)
         assertNull(resource.data)
         assertEquals("Invalid request", resource.message)
     }
