@@ -97,13 +97,14 @@ dependencies {
     // Timber
     implementation(libs.timber)
 
+    // Location services
+    implementation(libs.location)
+
     // Local tests
-    testImplementation(libs.junit4)
     testImplementation(libs.junit5)
     testImplementation(libs.truth)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockk)
-
 
     // Device tests
     androidTestImplementation(libs.androidx.test.ext)

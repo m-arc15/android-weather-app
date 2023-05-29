@@ -14,12 +14,12 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
-import org.junit.After
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
-import org.junit.Assert.fail
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.fail
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import retrofit2.HttpException
 import java.net.HttpURLConnection.HTTP_BAD_REQUEST
 import java.net.HttpURLConnection.HTTP_OK
@@ -34,17 +34,17 @@ internal class WeatherForecastApiTest {
 
     private lateinit var api: OpenMeteoWeatherForecastApi
 
-    @Before
+    @BeforeEach
     fun setUp() {
         server.start(8080)
         api = createRetrofitApi(
-            baseUrl = server.url("/"),
+            baseUrl = server.url("/").toString(),
             httpClient = client,
             apiClass = OpenMeteoWeatherForecastApi::class.java
         )
     }
 
-    @After
+    @AfterEach
     fun tearDown() {
         server.shutdown()
     }

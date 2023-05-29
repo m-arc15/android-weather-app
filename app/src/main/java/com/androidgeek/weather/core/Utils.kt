@@ -34,7 +34,7 @@ object Utils {
         .build()
 
     fun <T> createRetrofitApi(
-        baseUrl: HttpUrl,
+        baseUrl: String,
         httpClient: OkHttpClient,
         apiClass: Class<T>
     ): T = Retrofit.Builder()

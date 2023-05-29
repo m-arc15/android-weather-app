@@ -2,8 +2,8 @@ package com.androidgeek.weather.util
 
 import com.androidgeek.weather.util.FileReaderFromLocalTestResources.readBinaryFile
 import com.androidgeek.weather.util.FileReaderFromLocalTestResources.readFile
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
 internal class FileReaderFromLocalTestResourcesTest {
 
