@@ -2,9 +2,9 @@ package com.androidgeek.weather.feature.weather.data.mappers
 
 import com.androidgeek.weather.feature.weather.data.remote.model.WeatherForecastDataDto
 import com.androidgeek.weather.feature.weather.data.remote.model.WeatherForecastDto
-import com.androidgeek.weather.feature.weather.domain.model.WeatherData
-import com.androidgeek.weather.feature.weather.domain.model.WeatherInfo
-import com.androidgeek.weather.feature.weather.domain.model.WeatherType
+import com.androidgeek.weather.feature.weather.domain.weather.model.WeatherData
+import com.androidgeek.weather.feature.weather.domain.weather.model.WeatherInfo
+import com.androidgeek.weather.feature.weather.domain.weather.model.WeatherType
 import java.time.LocalDateTime
 
 private const val HOURS_PER_DAY = 24

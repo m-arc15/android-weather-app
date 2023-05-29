@@ -2,7 +2,7 @@ package com.androidgeek.weather.feature.weather.data.repository
 
 import com.androidgeek.weather.feature.weather.data.DataFixtures
 import com.androidgeek.weather.feature.weather.data.remote.api.OpenMeteoWeatherForecastApi
-import com.androidgeek.weather.feature.weather.domain.model.WeatherInfo
+import com.androidgeek.weather.feature.weather.domain.weather.model.WeatherInfo
 import com.androidgeek.weather.feature.weather.domain.util.Resource
 import com.google.common.truth.Truth.assertThat
 import io.mockk.coEvery

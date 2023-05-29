@@ -1,7 +1,7 @@
 package com.androidgeek.weather.feature.weather.domain
 
-import com.androidgeek.weather.feature.weather.domain.model.WeatherData
-import com.androidgeek.weather.feature.weather.domain.model.WeatherType
+import com.androidgeek.weather.feature.weather.domain.weather.model.WeatherData
+import com.androidgeek.weather.feature.weather.domain.weather.model.WeatherType
 import java.time.LocalDateTime
 
 object DomainFixtures {

@@ -3,8 +3,8 @@ package com.androidgeek.weather.feature.weather.data.mappers
 import com.androidgeek.weather.feature.weather.data.DataFixtures
 import com.androidgeek.weather.feature.weather.data.remote.model.WeatherForecastDataDto
 import com.androidgeek.weather.feature.weather.domain.DomainFixtures.NOW
-import com.androidgeek.weather.feature.weather.domain.model.WeatherData
-import com.androidgeek.weather.feature.weather.domain.model.WeatherType.Companion.fromWMO
+import com.androidgeek.weather.feature.weather.domain.weather.model.WeatherData
+import com.androidgeek.weather.feature.weather.domain.weather.model.WeatherType.Companion.fromWMO
 import com.google.common.truth.Truth.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test

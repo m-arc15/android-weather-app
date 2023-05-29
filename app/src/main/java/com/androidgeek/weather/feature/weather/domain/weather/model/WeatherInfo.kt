@@ -1,4 +1,6 @@
-package com.androidgeek.weather.feature.weather.domain.model
+package com.androidgeek.weather.feature.weather.domain.weather.model
+
+import com.androidgeek.weather.feature.weather.domain.weather.model.WeatherData
 
 /**
  * Contains information about a weather per day.

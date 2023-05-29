@@ -1,6 +1,8 @@
 package com.androidgeek.weather.feature.weather.domain.model
 
 import com.androidgeek.weather.feature.weather.domain.DomainFixtures
+import com.androidgeek.weather.feature.weather.domain.weather.model.WeatherData
+import com.androidgeek.weather.feature.weather.domain.weather.model.WeatherType
 import com.google.common.truth.Truth.assertThat
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime

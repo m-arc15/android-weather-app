@@ -1,4 +1,4 @@
-package com.androidgeek.weather.feature.weather.domain.model
+package com.androidgeek.weather.feature.weather.domain.weather.model
 
 import java.time.LocalDateTime
 
