@@ -77,8 +77,6 @@ dependencies {
     androidTestImplementation(composeBom)
     // Compose dependencies
     implementation(libs.bundles.compose)
-//    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
-//    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
@@ -95,9 +93,6 @@ dependencies {
     // Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
-//    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
-//    kapt("androidx.hilt:hilt-compiler:1.0.0")
-//    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
     // Timber
     implementation(libs.timber)
