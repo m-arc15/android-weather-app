@@ -1,6 +1,6 @@
 [versions]
 androidGradlePlugin = "8.1.0"
-androidToolsDesugar = "2.0.3"
+androidToolsDesugar = "2.0.4"
 androidxActivity = "1.7.1"
 androidxComposeBom = "2022.10.00"
 androidxCore = "1.10.0"
