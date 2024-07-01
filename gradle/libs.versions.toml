@@ -19,7 +19,7 @@ okhttp = "4.10.0"
 retrofit = "2.9.0"
 retrofitKotlinxSerializationJson = "1.0.0"
 timber = "5.0.1"
-truth = "1.1.3"
+truth = "1.4.3"
 
 [libraries]
 android-tools-desugar = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidToolsDesugar" }
